@@ -45,6 +45,7 @@ var (
 type Controller struct {
 	namespace      string
 	helmController helmcontroller.HelmChartController
+	relController  helmcontroller.HelmReleaseController
 	confController helmcontroller.HelmChartConfigController
 	jobsCache      batchcontroller.JobCache
 	apply          apply.Apply
@@ -59,7 +60,7 @@ const (
 	ConfigCRDName = "helmchartconfigs.helm.cattle.io"
 	Name          = "helm-controller"
 
-	TaintExternalCloudProvider = "node.cloudprovider.kubernetes.io/uninitialized"
+	TaintExternalCloudProvider = "node.cloudprovider.kuberneteks.io/uninitialized"
 	LabelNodeRolePrefix        = "node-role.kubernetes.io/"
 	LabelControlPlaneSuffix    = "control-plane"
 	LabelEtcdSuffix            = "etcd"
@@ -72,13 +73,14 @@ func Register(ctx context.Context,
 	k8s kubernetes.Interface,
 	apply apply.Apply,
 	helms helmcontroller.HelmChartController,
+	rels helmcontroller.HelmReleaseController,
 	confs helmcontroller.HelmChartConfigController,
 	jobs batchcontroller.JobController,
 	crbs rbaccontroller.ClusterRoleBindingController,
 	sas corecontroller.ServiceAccountController,
 	cm corecontroller.ConfigMapController) {
 	apply = apply.WithSetID(Name).
-		WithCacheTypes(helms, confs, jobs, crbs, sas, cm).
+		WithCacheTypes(helms, confs, rels, jobs, crbs, sas, cm).
 		WithStrictCaching().WithPatcher(batch.SchemeGroupVersion.WithKind("Job"), func(namespace, name string, pt types.PatchType, data []byte) (runtime.Object, error) {
 		err := jobs.Delete(namespace, name, &meta.DeleteOptions{PropagationPolicy: &deletePolicy})
 		if err == nil {
@@ -104,6 +106,7 @@ func Register(ctx context.Context,
 		},
 		helms,
 		confs,
+		rels,
 		jobs)
 
 	eventBroadcaster := record.NewBroadcaster()
@@ -117,6 +120,7 @@ func Register(ctx context.Context,
 	controller := &Controller{
 		helmController: helms,
 		confController: confs,
+		relController:  rels,
 		jobsCache:      jobs.Cache(),
 		apply:          apply,
 		recorder:       eventBroadcaster.NewRecorder(schemes.All, eventSource),
@@ -126,6 +130,8 @@ func Register(ctx context.Context,
 	helms.OnRemove(ctx, Name, controller.OnHelmRemove)
 	confs.OnChange(ctx, Name, controller.OnConfChange)
 	confs.OnRemove(ctx, Name, controller.OnConfChange)
+	// rels.OnChange(ctx, Name, controller.OnConfChange)
+	// rels.OnRemove(ctx, Name, controller.OnConfChange)
 }
 
 func (c *Controller) OnHelmChange(key string, chart *helmv1.HelmChart) (*helmv1.HelmChart, error) {

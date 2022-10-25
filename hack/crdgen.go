@@ -20,5 +20,7 @@ func main() {
 		WithColumn("Bootstrap", ".spec.bootstrap")
 	config := crd.NamespacedType("HelmChartConfig.helm.cattle.io/v1").
 		WithSchemaFromStruct(v1.HelmChartConfig{})
-	crd.Print(os.Stdout, []crd.CRD{chart, config})
+	rel := crd.NamespacedType("HelmRelease.helm.cattle.io/v1").
+		WithSchemaFromStruct(v1.HelmRelease{})
+	crd.Print(os.Stdout, []crd.CRD{chart, config, rel})
 }

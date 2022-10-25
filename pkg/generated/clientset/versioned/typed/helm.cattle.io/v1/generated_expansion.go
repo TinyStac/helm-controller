@@ -21,3 +21,5 @@ package v1
 type HelmChartExpansion interface{}
 
 type HelmChartConfigExpansion interface{}
+
+type HelmReleaseExpansion interface{}

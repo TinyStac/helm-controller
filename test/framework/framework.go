@@ -96,6 +96,7 @@ func getCRDs() ([]crd.CRD, error) {
 	for _, crdFn := range []func() (*crd.CRD, error){
 		ChartCRD,
 		ConfigCRD,
+		ReleaseCRD,
 	} {
 		crdef, err := crdFn()
 		if err != nil {
@@ -130,6 +131,20 @@ func ConfigCRD() (*crd.CRD, error) {
 	return &crd.CRD{
 		GVK:        prototype.GroupVersionKind(),
 		PluralName: helmapiv1.HelmChartConfigResourceName,
+		Status:     true,
+		Schema:     schema,
+	}, nil
+}
+
+func ReleaseCRD() (*crd.CRD, error) {
+	prototype := helmapiv1.NewHelmRelease("", "", helmapiv1.HelmRelease{})
+	schema, err := openapi.ToOpenAPIFromStruct(*prototype)
+	if err != nil {
+		return nil, err
+	}
+	return &crd.CRD{
+		GVK:        prototype.GroupVersionKind(),
+		PluralName: helmapiv1.HelmReleaseResourceName,
 		Status:     true,
 		Schema:     schema,
 	}, nil

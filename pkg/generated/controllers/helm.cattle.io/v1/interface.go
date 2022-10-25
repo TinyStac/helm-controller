@@ -31,6 +31,7 @@ func init() {
 
 type Interface interface {
 	HelmChart() HelmChartController
+	HelmRelease() HelmReleaseController
 	HelmChartConfig() HelmChartConfigController
 }
 
@@ -49,4 +50,7 @@ func (c *version) HelmChart() HelmChartController {
 }
 func (c *version) HelmChartConfig() HelmChartConfigController {
 	return NewHelmChartConfigController(schema.GroupVersionKind{Group: "helm.cattle.io", Version: "v1", Kind: "HelmChartConfig"}, "helmchartconfigs", true, c.controllerFactory)
+}
+func (c *version) HelmRelease() HelmReleaseController {
+	return NewHelmReleaseController(schema.GroupVersionKind{Group: "helm.cattle.io", Version: "v1", Kind: "HelmRelease"}, "helmreleases", true, c.controllerFactory)
 }

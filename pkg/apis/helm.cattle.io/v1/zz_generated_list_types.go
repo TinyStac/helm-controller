@@ -57,3 +57,20 @@ func NewHelmChartConfig(namespace, name string, obj HelmChartConfig) *HelmChartC
 	obj.Namespace = namespace
 	return &obj
 }
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// HelmReleaseList is a list of HelmRelease resources
+type HelmReleaseList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata"`
+
+	Items []HelmRelease `json:"items"`
+}
+
+func NewHelmRelease(namespace, name string, obj HelmRelease) *HelmRelease {
+	obj.APIVersion, obj.Kind = SchemeGroupVersion.WithKind("HelmRelease").ToAPIVersionAndKind()
+	obj.Name = name
+	obj.Namespace = namespace
+	return &obj
+}

@@ -30,6 +30,7 @@ import (
 var (
 	HelmChartResourceName       = "helmcharts"
 	HelmChartConfigResourceName = "helmchartconfigs"
+	HelmReleaseResourceName     = "helmreleases"
 )
 
 // SchemeGroupVersion is group version used to register these objects
@@ -57,6 +58,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&HelmChartList{},
 		&HelmChartConfig{},
 		&HelmChartConfigList{},
+		&HelmRelease{},
+		&HelmReleaseList{},
 	)
 	metav1.AddToGroupVersion(scheme, SchemeGroupVersion)
 	return nil

@@ -28,6 +28,7 @@ type HelmV1Interface interface {
 	RESTClient() rest.Interface
 	HelmChartsGetter
 	HelmChartConfigsGetter
+	HelmReleasesGetter
 }
 
 // HelmV1Client is used to interact with features provided by the helm.cattle.io group.
@@ -41,6 +42,10 @@ func (c *HelmV1Client) HelmCharts(namespace string) HelmChartInterface {
 
 func (c *HelmV1Client) HelmChartConfigs(namespace string) HelmChartConfigInterface {
 	return newHelmChartConfigs(c, namespace)
+}
+
+func (c *HelmV1Client) HelmReleases(namespace string) HelmReleaseInterface {
+	return newHelmReleases(c, namespace)
 }
 
 // NewForConfig creates a new HelmV1Client for the given config.
