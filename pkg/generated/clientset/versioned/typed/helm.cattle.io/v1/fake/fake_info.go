@@ -21,7 +21,7 @@ package fake
 import (
 	"context"
 
-	helmcattleiov1 "github.com/k3s-io/helm-controller/pkg/apis/helm.cattle.io/v1"
+	helmcattleiov1 "github.com/TinyStac/helm-controller/pkg/apis/helm.cattle.io/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"

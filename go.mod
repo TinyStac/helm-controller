@@ -1,4 +1,4 @@
-module github.com/k3s-io/helm-controller
+module github.com/TinyStac/helm-controller
 
 go 1.16
 

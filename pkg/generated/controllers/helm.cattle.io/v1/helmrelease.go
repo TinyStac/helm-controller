@@ -22,7 +22,7 @@ import (
 	"context"
 	"time"
 
-	v1 "github.com/k3s-io/helm-controller/pkg/apis/helm.cattle.io/v1"
+	v1 "github.com/TinyStac/helm-controller/pkg/apis/helm.cattle.io/v1"
 	"github.com/rancher/lasso/pkg/client"
 	"github.com/rancher/lasso/pkg/controller"
 	"github.com/rancher/wrangler/pkg/generic"

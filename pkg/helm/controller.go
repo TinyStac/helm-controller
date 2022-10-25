@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	helmv1 "github.com/k3s-io/helm-controller/pkg/apis/helm.cattle.io/v1"
-	helmcontroller "github.com/k3s-io/helm-controller/pkg/generated/controllers/helm.cattle.io/v1"
+	helmv1 "github.com/TinyStac/helm-controller/pkg/apis/helm.cattle.io/v1"
+	helmcontroller "github.com/TinyStac/helm-controller/pkg/generated/controllers/helm.cattle.io/v1"
 	"github.com/rancher/wrangler/pkg/apply"
 	batchcontroller "github.com/rancher/wrangler/pkg/generated/controllers/batch/v1"
 	corecontroller "github.com/rancher/wrangler/pkg/generated/controllers/core/v1"

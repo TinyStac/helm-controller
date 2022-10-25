@@ -6,8 +6,8 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	helmapiv1 "github.com/k3s-io/helm-controller/pkg/apis/helm.cattle.io/v1"
-	"github.com/k3s-io/helm-controller/test/framework"
+	helmapiv1 "github.com/TinyStac/helm-controller/pkg/apis/helm.cattle.io/v1"
+	"github.com/TinyStac/helm-controller/test/framework"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/util/intstr"

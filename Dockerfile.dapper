@@ -14,7 +14,7 @@ RUN if [ "${ARCH}" == "amd64" ]; then \
 
 ENV GO111MODULE off
 ENV DAPPER_ENV REPO TAG DRONE_TAG
-ENV DAPPER_SOURCE /go/src/github.com/k3s-io/helm-controller/
+ENV DAPPER_SOURCE /go/src/github.com/TinyStac/helm-controller/
 ENV DAPPER_OUTPUT ./bin ./dist
 ENV DAPPER_DOCKER_SOCKET true
 ENV HOME ${DAPPER_SOURCE}

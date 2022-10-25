@@ -8,8 +8,8 @@ import (
 	"context"
 	"os"
 
-	helmv1 "github.com/k3s-io/helm-controller/pkg/generated/controllers/helm.cattle.io"
-	helmcontroller "github.com/k3s-io/helm-controller/pkg/helm"
+	helmv1 "github.com/TinyStac/helm-controller/pkg/generated/controllers/helm.cattle.io"
+	helmcontroller "github.com/TinyStac/helm-controller/pkg/helm"
 	"github.com/rancher/wrangler/pkg/apply"
 	batchv1 "github.com/rancher/wrangler/pkg/generated/controllers/batch"
 	corev1 "github.com/rancher/wrangler/pkg/generated/controllers/core"

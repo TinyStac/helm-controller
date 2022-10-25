@@ -3,8 +3,8 @@ package main
 import (
 	"os"
 
-	v1 "github.com/k3s-io/helm-controller/pkg/apis/helm.cattle.io/v1"
-	_ "github.com/k3s-io/helm-controller/pkg/generated/controllers/helm.cattle.io/v1"
+	v1 "github.com/TinyStac/helm-controller/pkg/apis/helm.cattle.io/v1"
+	_ "github.com/TinyStac/helm-controller/pkg/generated/controllers/helm.cattle.io/v1"
 	"github.com/rancher/wrangler/pkg/crd"
 )
 
